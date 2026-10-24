@@ -9,7 +9,26 @@
 # actualizar_cantidad ok
 # mostrar_inventario_ordenado ok
 # main()
+import json
 
+
+def cargar_datos():
+    try:
+        with open("inventario.json", "r", encoding="utf-8") as archivo:
+            inventario = json.load(archivo)
+            print("\nDatos recuperados correctamente")
+            return inventario
+    except FileNotFoundError:
+        print("\nNo se encontraron datos guardados. Se creará un nuevo inventario.")
+        return []
+    except json.JSONDecodeError:
+        print("\nDatos guardados corruptos. Se creará un nuevo inventario.")
+        return []
+ 
+    
+def guardar_datos(inventario):
+    with open("inventario.json", "w", encoding="utf-8") as archivo:
+        json.dump(inventario, archivo, ensure_ascii=False)
 
 def pedir_cantidad():
     while True:
@@ -33,6 +52,7 @@ def agregar_producto(inventario):
         else:
             cantidad = pedir_cantidad()
             inventario.append({"Nombre": producto, "Cantidad": cantidad})
+            guardar_datos(inventario)
             print(f"\nProducto {producto} añadido\n")
             break
 
@@ -57,6 +77,7 @@ def eliminar_un_producto(inventario):
     for i, producto in enumerate(inventario):
         if producto["Nombre"] == producto_a_eliminar:
             del inventario[i]
+            guardar_datos(inventario)
             return f"\nSe ha eliminado el producto {producto_a_eliminar}."
     return f"\nNo se encontró ningún producto llamado {producto_a_eliminar}."
 
@@ -70,6 +91,7 @@ def consultar_stock(inventario):
 
 def eliminar_todos_los_productos(inventario):
     inventario.clear()
+    guardar_datos(inventario)
     print("\nSe han eliminado todos los productos del inventario\n")
 
 
@@ -78,14 +100,12 @@ def actualizar_cantidad(inventario):
     for i, producto in enumerate(inventario, start=1):
         print(f"{i}. {producto["Nombre"]}: {producto["Cantidad"]}")
 
-    opcion = pedir_opcion(
-        "\nSeleccione un producto: ", [str(i) for i in range(1, len(inventario) + 1)]
-    )
-
+    opcion = pedir_opcion("\nSeleccione un producto: ", [str(i) for i in range(1, len(inventario) + 1)])
     producto_elegido = inventario[int(opcion) - 1]
     print(f"\nSeleccionó {producto_elegido["Nombre"]}")
     nueva_cantidad = pedir_cantidad()
     producto_elegido["Cantidad"] = nueva_cantidad
+    guardar_datos(inventario)
     print(f"\nCantidad de {producto_elegido["Nombre"]} actualizada a {nueva_cantidad}")
 
 
@@ -110,8 +130,8 @@ def pedir_opcion(mensaje, opciones):
 
 
 def programa():
-    inventario = []
     print("\nInventario de productos")
+    inventario = cargar_datos()
     while True:
         menu()
         opcion = pedir_opcion(
