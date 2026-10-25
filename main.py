@@ -1,4 +1,5 @@
 
+from exportar_csv import exportar_inventario
 from logica import (
     actualizar_cantidad,
     agregar_producto,
@@ -52,7 +53,11 @@ def main():
                     eliminar_todos_los_productos(inventario)
             case "7":
                 break
-    print("\nHa salido satisfactoriamente del programa.\n")
+    if not inventario:
+        print("\nHa salido del programa. No se han guardado datos.\n")
+    else:
+        exportar_inventario(inventario)
+        print("\nHa salido del programa. Se ha exportado el inventario satisfactoriamente.\n")
 
 
 if __name__ == "__main__":
