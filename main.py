@@ -53,11 +53,12 @@ def main():
                     eliminar_todos_los_productos(inventario)
             case "7":
                 break
+    
     if not inventario:
         print("\nHa salido del programa. No se han guardado datos.\n")
     else:
         exportar_inventario(inventario)
-        print("\nHa salido del programa. Se ha exportado el inventario satisfactoriamente.\n")
+        print("\nHa salido del programa.\n")
 
 
 if __name__ == "__main__":
