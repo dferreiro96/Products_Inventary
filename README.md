@@ -47,6 +47,8 @@ json
 ]
 
 ### Project Structure
+<img width="659" height="464" alt="Sin título" src="https://github.com/user-attachments/assets/3ab8b8e6-a543-4cdc-b7e2-2ca46b7a0dac" />
+
 
 This makes it easy to split into separate modules later (e.g., data.py, ui.py, operations.py) or reuse the logic in a GUI or web app.
 
