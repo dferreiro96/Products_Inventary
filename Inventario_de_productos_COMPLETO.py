@@ -1,14 +1,5 @@
-# Inventario de productos
-# Funciones:
-# agragar_productos  ok
-# pedir_cantidad  ok
-# consultar_stock ok
-# consultar_un_producto ok
-# eliminar_un_producto ok
-# eliminar_todos_los_productos ok
-# actualizar_cantidad ok
-# mostrar_inventario_ordenado ok
-# main()
+
+import csv
 import json
 
 
@@ -99,6 +90,16 @@ def actualizar_cantidad(inventario):
     print("\nProductos en el inventario:")
     for i, producto in enumerate(inventario, start=1):
         print(f"{i}. {producto["Nombre"]}: {producto["Cantidad"]}")
+        
+def exportar_inventario(inventario):
+    try:
+        with open("reporte_inventario.csv", "w", newline="", encoding="utf-8") as archivo:
+            escritor = csv.DictWriter(archivo, fieldnames=["Nombre", "Cantidad"])
+            escritor.writeheader()
+            escritor.writerows(inventario)
+            return "\nSe han exportado los datos correctamente."
+    except PermissionError:
+        print("\nERROR: No se pudo guardar el archivo. Otra aplicación lo está usando.")
 
     opcion = pedir_opcion("\nSeleccione un producto: ", [str(i) for i in range(1, len(inventario) + 1)])
     producto_elegido = inventario[int(opcion) - 1]
@@ -129,7 +130,7 @@ def pedir_opcion(mensaje, opciones):
             print("\nOpción no válida")
 
 
-def programa():
+def main():
     print("\nInventario de productos")
     inventario = cargar_datos()
     while True:
@@ -167,13 +168,16 @@ def programa():
                 else:
                     eliminar_todos_los_productos(inventario)
             case "7":
-                return
+                break
 
-
-def main():
-    programa()
-    print("\nHa salido satisfactoriamente del programa.\n")
-
+    if not inventario:
+        print("\nHa salido del programa. No se han guardado datos.\n")
+    
+    else:
+        exportar_inventario(inventario)
+        print("\nHa salido del programa.\n")
+    
+    
 
 if __name__ == "__main__":
     main()
