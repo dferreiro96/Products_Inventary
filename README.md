@@ -110,7 +110,8 @@ json
 ]
 
 ### Estructura del proyecto
-<img width="659" height="464" alt="Sin título" src="https://github.com/user-attachments/assets/3ab8b8e6-a543-4cdc-b7e2-2ca46b7a0dac" />
+<img width="665" height="453" alt="Sin título" src="https://github.com/user-attachments/assets/961c8bc2-7fb4-492a-839c-227baa2d64bf" />
+
 Aunque aquí se entrega como un único archivo por comodidad, el código está modularizado por diseño. Cada responsabilidad vive en su propia función:
 
 
