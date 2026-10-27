@@ -2,7 +2,7 @@
 
 ## English
 
-A simple command-line inventory management application written in Python. It allows you to add, view, search, update, and delete products, storing everything in a local JSON file so your data persists between sessions.
+A simple command-line inventory management application written in Python. It allows you to add, view, search, update, and delete products, storing everything in a local JSON file and export it as a csv file so your data persists between sessions.
 
 ### Features
 
@@ -62,7 +62,7 @@ This makes it easy to split into separate modules later (e.g., data.py, ui.py, o
 
 ## 🇪🇸 Español
 
-Una aplicación sencilla de línea de comandos para gestionar un inventario, escrita en Python. Permite agregar, consultar, buscar, actualizar y eliminar productos, guardando todo en un archivo JSON local para que los datos persistan entre sesiones.
+Una aplicación sencilla de línea de comandos para gestionar un inventario, escrita en Python. Permite agregar, consultar, buscar, actualizar y eliminar productos, guardando todo en un archivo JSON local para que los datos persistan entre sesiones, y exportarlos vía archivo csv.
 
 ### Características
 
